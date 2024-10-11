@@ -18,7 +18,7 @@ class Location(models.Model):
             raise ValidationError("경도는 -180에서 180 사이의 값이어야 합니다.")
 
     def __str__(self):
-        return f"위도: {self.latitude}, 경도: {self.longitude}"
+        return f"가게위치 위도: {self.latitude}, 경도: {self.longitude}"
     
 #가게 시공기술들
 class SigongSkill(models.Model):
@@ -52,6 +52,9 @@ class CarStore(models.Model):
     sigongSkill = models.OneToOneField(SigongSkill, on_delete=models.CASCADE, blank=True,  verbose_name="시공기술") #시공기술
     storeLocation =  models.OneToOneField(Location, verbose_name="가게위치", on_delete=models.CASCADE) #가게위치
     thumbnail = models.ImageField(upload_to='car_store_thumbnail', blank=False)
+
+    def __str__(self):
+        return self.storeName
 
 #가게사진
 class StorePhoto(models.Model):
