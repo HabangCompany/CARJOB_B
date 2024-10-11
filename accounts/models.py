@@ -21,7 +21,7 @@ class User(AbstractUser):
     phoneNumber = models.CharField(max_length=15, blank=False)
     # User와 UserAddress 1:1 관계 설정
     address = models.OneToOneField(UserAddress, on_delete=models.CASCADE, null=True, blank=True)
-    carModel = models.CharField(max_length=10)
+    carModel = models.CharField(max_length=10, blank=True)
     is_Store = models.BooleanField(default=False)
     store= models.ForeignKey(CarStore, on_delete=models.CASCADE,null=True, blank=True)
     first_name = None
