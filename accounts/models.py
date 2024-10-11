@@ -6,7 +6,7 @@ from carStore.models import CarStore
 
 #유저 주소
 class UserAddress(models.Model):
-    postal_code = models.CharField(max_length=6, blank=False)  # 우편번호
+    postal_code = models.CharField(max_length=10, blank=False)  # 우편번호
     street_address = models.CharField(max_length=30, blank=False)  # 도로명 주소
     jibun_address = models.CharField(max_length=30, blank=True, null=True)  # 지번 주소
     detail_address = models.CharField(max_length=30, blank=False)  # 상세 주소
