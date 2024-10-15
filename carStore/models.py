@@ -44,7 +44,10 @@ class SigongSkill(models.Model):
     def __str__(self):
         return "시공 기술 설정"
 
-
+#가게사진
+class StorePhoto(models.Model):
+    car_store = models.ForeignKey("CarStore", on_delete=models.CASCADE, related_name='photos' )
+    photo = models.ImageField(upload_to='store_photo', verbose_name="가게사진")
 
 #자동차 샵
 class CarStore(models.Model):
@@ -52,11 +55,12 @@ class CarStore(models.Model):
     sigongSkill = models.OneToOneField(SigongSkill, on_delete=models.CASCADE, blank=True,  verbose_name="시공기술") #시공기술
     storeLocation =  models.OneToOneField(Location, verbose_name="가게위치", on_delete=models.CASCADE) #가게위치
     thumbnail = models.ImageField(upload_to='car_store_thumbnail', blank=False)
+    business_hours = models.CharField(max_length=100, verbose_name="운영시간", null=True)  # 운영시간
+    holidays = models.CharField(max_length=50, verbose_name="휴무일", null=True)  # 휴무일
+    store_phone = models.CharField(max_length=15, verbose_name="가게 전화번호", null=True)  # 가게 전화번호
 
+    """ ****추가될것들**** 
+    """
     def __str__(self):
         return self.storeName
 
-#가게사진
-class StorePhoto(models.Model):
-    car_store = models.ForeignKey("CarStore", on_delete=models.CASCADE, related_name='photos' )
-    photo = models.ImageField(upload_to='store_photo', verbose_name="가게사진")
