@@ -27,5 +27,8 @@ class User(AbstractUser):
     first_name = None
     last_name = None
 
+    USERNAME_FIELD = 'email' # 로그인할때 아이디를 이메일로 사용하긔
+    REQUIRED_FIELDS = ['name', 'phoneNumber']  # 이메일 외에 필수로 입력할 필드
+
     def __str__(self):
         return self.email
