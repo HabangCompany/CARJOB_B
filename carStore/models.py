@@ -54,7 +54,7 @@ class CarStore(models.Model):
     storeName = models.CharField(max_length=20, blank=False, verbose_name="가게이름") #가게이름
     sigongSkill = models.OneToOneField(SigongSkill, on_delete=models.CASCADE, blank=True,  verbose_name="시공기술") #시공기술
     storeLocation =  models.OneToOneField(Location, verbose_name="가게위치", on_delete=models.CASCADE) #가게위치
-    thumbnail = models.ImageField(upload_to='car_store_thumbnail', blank=False)
+    thumbnail = models.ImageField(upload_to='car_store_thumbnail', blank=True)
     business_hours = models.CharField(max_length=100, verbose_name="운영시간", null=True)  # 운영시간
     holidays = models.CharField(max_length=50, verbose_name="휴무일", null=True)  # 휴무일
     store_phone = models.CharField(max_length=15, verbose_name="가게 전화번호", null=True)  # 가게 전화번호
