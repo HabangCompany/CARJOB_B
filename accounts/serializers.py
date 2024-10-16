@@ -14,7 +14,8 @@ class UserSerializer(serializers.ModelSerializer):
             email=validated_data['email'],
             name=validated_data['name'],
             phoneNumber=validated_data['phoneNumber'],
-            carModel=validated_data['carModel']
+            carModel=validated_data['carModel'],
+            username=validated_data['email']
         )
         user.set_password(validated_data['password'])  # 비밀번호 해시화
         user.save()
