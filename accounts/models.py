@@ -18,11 +18,11 @@ class UserAddress(models.Model):
 class User(AbstractUser):
     email =models.EmailField(unique=True) # 유일한 이메일 입력
     name = models.CharField(max_length=20, blank=False)
-    phoneNumber = models.CharField(max_length=15, blank=False)
+    phone_number = models.CharField(max_length=15, blank=False)
     # User와 UserAddress 1:1 관계 설정
     address = models.OneToOneField(UserAddress, on_delete=models.CASCADE, null=True, blank=True)
-    carModel = models.CharField(max_length=20, blank=True)
-    is_Store = models.BooleanField(default=False)
+    car_model = models.CharField(max_length=20, blank=True)
+    is_store = models.BooleanField(default=False)
     store= models.ForeignKey(CarStore, on_delete=models.CASCADE,null=True, blank=True)
     first_name = None
     last_name = None
