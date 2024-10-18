@@ -51,7 +51,7 @@ class StorePhoto(models.Model):
 
 #자동차 샵
 class CarStore(models.Model):
-    storeName = models.CharField(max_length=20, blank=False, verbose_name="가게이름") #가게이름
+    store_name = models.CharField(max_length=20, blank=False, verbose_name="가게이름") #가게이름
     sigong_skill = models.OneToOneField(SigongSkill, on_delete=models.CASCADE, blank=True,  verbose_name="시공기술") #시공기술
     store_location =  models.OneToOneField(Location, verbose_name="가게위치", on_delete=models.CASCADE) #가게위치
     thumbnail = models.ImageField(upload_to='car_store_thumbnail', blank=True) #가게 대표이미지 

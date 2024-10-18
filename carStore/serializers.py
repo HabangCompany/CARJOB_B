@@ -12,8 +12,8 @@ class SigongSkillSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class CarStoreSerializer(serializers.ModelSerializer):
-    storeLocation = LocationSerializer()  # Nested serializer
-    sigongSkill = SigongSkillSerializer()  # Nested serializer
+    store_location = LocationSerializer()  # Nested serializer
+    sigong_skill = SigongSkillSerializer()  # Nested serializer
     thumbnail = serializers.ImageField(required=False) ##필수 항목이아님
 
     class Meta:

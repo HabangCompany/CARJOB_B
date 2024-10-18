@@ -9,15 +9,15 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('email', 'name', 'phoneNumber', 'password', 'carModel')
+        fields = ('email', 'name', 'phone_number', 'password', 'car_model')
 
     def create(self, validated_data):
         # 새로운 유저를 생성할 때, 비밀번호를 해시화하여 저장
         user = User(
             email=validated_data['email'],
             name=validated_data['name'],
-            phoneNumber=validated_data['phoneNumber'],
-            carModel=validated_data['carModel'],
+            phone_number=validated_data['phone_number'],
+            car_model=validated_data['car_model'],
             username=validated_data['email']
         )
         user.set_password(validated_data['password'])  # 비밀번호 해시화
