@@ -11,7 +11,8 @@ from .serializers import UserSerializer, LoginSerializer
 #             serializer.save()
 #             return Response(serializer.data, status=status.HTTP_201_CREATED)
 #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
+#회원가입
 @api_view(['POST'])
 def register_user(request):
     serializer = UserSerializer(data = request.data)
@@ -19,7 +20,7 @@ def register_user(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+#로그인
 @api_view(['POST'])
 def login_user(request):
     serializer = LoginSerializer(data= request.data)
