@@ -10,7 +10,13 @@ from .serializers import CarStoreSerializer
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def registerCarStore(request):
+
     user= request.user
+
+    if user.store_id :
+        print("가게있음")
+        return Response({"message":"가게가 이미 등록 되어있어요"},status=status.HTTP_400_BAD_REQUEST)
+
     serializer = CarStoreSerializer(data = request.data)
     if serializer.is_valid():
         car_store = serializer.save()
