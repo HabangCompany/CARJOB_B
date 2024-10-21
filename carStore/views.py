@@ -26,3 +26,19 @@ def registerCarStore(request):
 
         return Response({"message": "자동차 가게가 성공적으로 설정되었습니다."}, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def deleteCarStore(request):
+    user = request.user
+    if not user.is_Store or not user.store:
+        return Response({"error": "해당 유저는 가게를 소유하고 있지 않습니다."}, status=status.HTTP_400_BAD_REQUEST)
+    try:
+        car_store = user.store
+        car_store.delete()
+        user.is_Store = False
+        user.store = None
+        user.save()
+        return Response({"message": "가게가 성공적으로 삭제되었습니다."}, status=status.HTTP_200_OK)
+    except CarStore.DoesNotExist:
+        return Response({"error": "가게를 찾을 수 없습니다."}, status=status.HTTP_404_NOT_FOUND)
