@@ -59,7 +59,8 @@ class CarStore(models.Model):
     holidays = models.CharField(max_length=50, verbose_name="휴무일", null=True)  # 휴무일
     store_phone = models.CharField(max_length=15, verbose_name="가게 전화번호", null=True)  # 가게 전화번호
 
-    """ ****추가될것들**** 
+    """
+        ****추가될것들**** 
     """
     def __str__(self):
         return self.storeName
