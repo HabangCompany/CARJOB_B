@@ -25,22 +25,22 @@ class UserSerializer(serializers.ModelSerializer):
         return user
     
 class LoginSerializer(serializers.Serializer):
-    username = serializers.CharField() # 아이디
+    email = serializers.CharField() # 아이디
     password = serializers.CharField(write_only= True) #비밀번호 쓰기전용 (응답으로 비번을전달하지않음)
 
     def validate(self, data):
-        username = data.get('username')
+        email = data.get('email')
         password = data.get('password')
 
-        if username and password:
-            user = authenticate(username=username, password=password)
+        if email and password:
+            user = authenticate(username=email, password=password)
 
             if user:
                 refresh = RefreshToken.for_user(user)
                 data['refresh_token'] = str(refresh)
                 data['access_token'] = str(refresh.access_token)
             else:
-                raise serializers.ValidationError('잘못된 증명입니다. 다시 시도해 주세요')
+                raise serializers.ValidationError('잘못된 이메일 또는 비밀번호입니다')
         
         else:
             raise serializers.ValidationError("아이디와 비밀번호가 틀렸습니다.")
