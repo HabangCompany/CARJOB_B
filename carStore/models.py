@@ -64,5 +64,5 @@ class CarStore(models.Model):
         ****추가될것들**** 
     """
     def __str__(self):
-        return self.storeName
+        return self.store_name
 
