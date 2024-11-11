@@ -48,6 +48,7 @@ class SigongSkill(models.Model):
 class StorePhoto(models.Model):
     car_store = models.ForeignKey("CarStore", on_delete=models.CASCADE, related_name='photos' )
     photo = models.ImageField(upload_to='store_photo', verbose_name="가게사진")
+    order = models.PositiveIntegerField(default=0, verbose_name="가게사진 순서")
 
 #자동차 샵
 class CarStore(models.Model):
