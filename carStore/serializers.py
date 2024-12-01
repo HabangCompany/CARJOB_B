@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CarStore, Location, SigongSkill
+from .models import CarStore, Location, SigongSkill, StorePhoto
 
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,9 +11,15 @@ class SigongSkillSerializer(serializers.ModelSerializer):
         model = SigongSkill
         fields = '__all__'
 
+class CarStoerPhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StorePhoto
+        fields = ['photo','order']
+
 class CarStoreSerializer(serializers.ModelSerializer):
-    store_location = LocationSerializer()  # Nested serializer
-    sigong_skill = SigongSkillSerializer()  # Nested serializer
+    store_location = LocationSerializer()  
+    sigong_skill = SigongSkillSerializer()  
+    storePhotos = CarStoerPhotoSerializer()
     thumbnail = serializers.ImageField(required=False) ##필수 항목이아님
 
     class Meta:

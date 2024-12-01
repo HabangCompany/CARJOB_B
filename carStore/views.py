@@ -10,9 +10,7 @@ from .serializers import CarStoreSerializer
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def registerCarStore(request):
-
     user= request.user
-
     if user.store_id :
         print("가게있음")
         return Response({"message":"가게가 이미 등록 되어있어요"},status=status.HTTP_400_BAD_REQUEST)
@@ -42,3 +40,13 @@ def deleteCarStore(request):
         return Response({"message": "가게가 성공적으로 삭제되었습니다."}, status=status.HTTP_200_OK)
     except CarStore.DoesNotExist:
         return Response({"error": "가게를 찾을 수 없습니다."}, status=status.HTTP_404_NOT_FOUND)
+    
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def updateCarStore(request):
+    user = request.user
+    
+    if not user.is_store or not user.store:
+        return Response({"error":"가게가 없어요"}, status=status.HTTP_400_BAD_REQUEST)
+    

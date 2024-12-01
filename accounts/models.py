@@ -23,7 +23,7 @@ class User(AbstractUser):
     address = models.OneToOneField(UserAddress, on_delete=models.CASCADE, null=True, blank=True)
     car_model = models.CharField(max_length=20, blank=True)
     is_store = models.BooleanField(default=False)
-    store= models.ForeignKey(CarStore, on_delete=models.CASCADE,null=True, blank=True)
+    store= models.ForeignKey(CarStore, on_delete=models.SET_NULL,null=True, blank=True)
     first_name = None
     last_name = None
 
