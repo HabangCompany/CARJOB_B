@@ -12,11 +12,11 @@ class UserAddress(models.Model):
     detail_address = models.CharField(max_length=50, blank=False)  # 상세 주소
 
     def __str__(self):
-        return f"{self.street_address}, {self.postal_code}"
+        return f"{self.street_address},{self.detail_address}, {self.postal_code}"
     
     
 class User(AbstractUser):
-    email =models.EmailField(unique=True) # 유일한 이메일 입력
+    email =models.EmailField(unique=True) # 유일한 이메일 입력 
     name = models.CharField(max_length=20, blank=False)
     phone_number = models.CharField(max_length=15, blank=False)
     # User와 UserAddress 1:1 관계 설정

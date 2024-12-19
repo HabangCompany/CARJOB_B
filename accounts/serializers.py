@@ -1,8 +1,12 @@
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import serializers
-from .models import User
+from .models import User, UserAddress
 
+class AddressSerializer(serializers.Serializer):
+    class Meta:
+        model : UserAddress
+        fields : '__all__'
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only= True) #비밀번호는 쓰기전용임
