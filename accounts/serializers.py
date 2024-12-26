@@ -3,26 +3,32 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import serializers
 from .models import User, UserAddress
 
-class AddressSerializer(serializers.Serializer):
+class AddressSerializer(serializers.ModelSerializer):
     class Meta:
-        model : UserAddress
-        fields : '__all__'
+        model = UserAddress
+        fields = '__all__'
 
 class UserSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only= True) #비밀번호는 쓰기전용임
+    address = AddressSerializer()  # 중첩된 AddressSerializer 사용
+    password = serializers.CharField(write_only=True) # 비밀번호는 쓰기전용 그래야 리턴이 안됨
 
     class Meta:
         model = User
-        fields = ('email', 'name', 'phone_number', 'password', 'car_model')
+        fields = ('email', 'nickname', 'phone_number', 'password', 'address')
 
+    #회원가입
     def create(self, validated_data):
-        # 새로운 유저를 생성할 때, 비밀번호를 해시화하여 저장
+        # 중첩된 address 데이터 추출 및 저장
+        address_data = validated_data.pop('address')
+        address = UserAddress.objects.create(**address_data)
+
+        # User 생성
         user = User(
+            username = validated_data['email'],
             email=validated_data['email'],
-            name=validated_data['name'],
+            nickname=validated_data['nickname'],
             phone_number=validated_data['phone_number'],
-            car_model=validated_data['car_model'],
-            username=validated_data['email']
+            address=address
         )
         user.set_password(validated_data['password'])  # 비밀번호 해시화
         user.save()
